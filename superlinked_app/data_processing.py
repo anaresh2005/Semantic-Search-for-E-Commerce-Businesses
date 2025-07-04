@@ -46,16 +46,17 @@ def process_dataset(df: pd.DataFrame) -> pd.DataFrame:
 
     df_processed = df_processed[columns]
 
-    df_processed["ratings"] = df_processed["ratings"].apply(parse_ratings_count)
-    df_processed["stars"] = df_processed["stars"].apply(parse_stars_count)
+    df_processed["review_count"] = df_processed["ratings"].apply(parse_ratings_count)
+    df_processed["review_ratings"] = df_processed["stars"].apply(parse_stars_count)
     df_processed["price"] = df_processed["price"].apply(parse_price)
 
     df_processed = df_processed.dropna(subset=["price"]).astype({
         "asin": str,
         "type": str,
+        "category": str,
         "title": str,
         "description": str,
-        "review_rating": float,
+        "review_ratings": float,
         "review_count": int,
         "price": float
     })
