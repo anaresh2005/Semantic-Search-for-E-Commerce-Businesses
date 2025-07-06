@@ -24,9 +24,41 @@ category_space = sl.CategorySpace(
     negative_filter=-1
 )
 
+# Initialize the Vertex AI client and the model handler for text embeddings
 vertex_client = genai.Client()
 handler = VertexGeminiHandler(client=vertex_client)
+
+# Define the text similarity spaces for title and description using Superlinked's text similarity space definition
 title_space = sl.TextSimilaritySpace(
     text=product.title,
     model_handler=handler
+)
+
+dscription_space = sl.TextSimilaritySpace(
+    text=product.description,
+    model_handler=handler
+)
+
+review_ratings_space = sl.NumberSpace(
+    number = product.review_ratings,
+    min_value = -1.0,
+    max_value = 5.0,
+    mode=sl.Mode.MAXIMUM
+)
+
+price_space = sl.NumberSpace(
+    number=product.price,
+    min_value=0.0,
+    max_value=1000.0,
+    mode=sl.Mode.MINIMUM
+)
+
+product_index = sl.Index(
+    spaces=[
+        category_space,
+        title_space,
+        dscription_space,
+        review_ratings_space,
+        price_space
+    ]
 )
