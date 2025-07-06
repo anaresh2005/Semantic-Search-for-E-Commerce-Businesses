@@ -17,7 +17,7 @@ class ProductSchema(sl.Schema):
 product = ProductSchema()
 
 # Define the category space for products using Superlinked's category space definition
-category_space = sl.CategorySpace(
+category_space = sl.CategoricalSimilaritySpace(
     category_input=product.category,
     categories=constants.CATEGORIES,
     uncategorized_as_category=True,
@@ -34,7 +34,7 @@ title_space = sl.TextSimilaritySpace(
     model_handler=handler
 )
 
-dscription_space = sl.TextSimilaritySpace(
+description_space = sl.TextSimilaritySpace(
     text=product.description,
     model_handler=handler
 )
@@ -57,8 +57,9 @@ product_index = sl.Index(
     spaces=[
         category_space,
         title_space,
-        dscription_space,
+        description_space,
         review_ratings_space,
         price_space
-    ]
+    ],
+    fields=[product.type, product.category, product.review_ratings, product.price]
 )
