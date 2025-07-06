@@ -13,6 +13,7 @@ dependencies = [
     "superlinked (>=29.1.0,<30.0.0)",
     "google-genai (>=1.24.0,<2.0.0)",
     "numpy (>=2.3.1,<3.0.0)",
+    "pydantic (>=2.11.7,<3.0.0)",
 ]
 
 

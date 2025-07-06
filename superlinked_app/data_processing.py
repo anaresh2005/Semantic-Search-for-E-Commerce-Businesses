@@ -1,8 +1,5 @@
 import pandas as pd
 
-
-
-
 def parse_ratings_count(ratings: str) -> int | None: 
     if pd.isna(ratings):
         return 0
