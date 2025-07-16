@@ -1,8 +1,11 @@
 from pathlib import Path
+from loguru import logger
 from pydantic import SecretStr
 from pydantic import BaseSettings, SettingsConfigDict
 
-ENV_FILE = Path(__file__).parent.parent / ".env"
+ROOT_DIR = Path(__file__).parent.parent
+ENV_FILE = ROOT_DIR / ".env"
+logger.info(f"Loading .env file from: {ENV_FILE}")
 
 
 class Settings(BaseSettings):

@@ -2,6 +2,16 @@ from superlinked import framework as sl
 from superlinked_app import constants
 from google import genai
 from embedding import VertexGeminiHandler
+from superlinked_app.config import settings
+
+
+assert (
+    settings.GEMINI_API_KEY
+), "GEMINI_API_KEY must be set in environment variables to use the Gemini encoding model."
+
+# Initialize the Vertex AI client and the model handler for text embeddings
+vertex_client = genai.Client()
+handler = VertexGeminiHandler(client=vertex_client)
 
 
 # Define the schema for a product using Superlinked's schema definition
@@ -26,9 +36,6 @@ category_space = sl.CategoricalSimilaritySpace(
     negative_filter=-1,
 )
 
-# Initialize the Vertex AI client and the model handler for text embeddings
-vertex_client = genai.Client()
-handler = VertexGeminiHandler(client=vertex_client)
 
 # Define the text similarity spaces for title and description using Superlinked's text similarity space definition
 title_space = sl.TextSimilaritySpace(text=product.title, model_handler=handler)
