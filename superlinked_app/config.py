@@ -20,8 +20,8 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: SecretStr
 
     # Gemini API key
-    GEMINI_API_KEY: SecretStr | None = None
     GEMINI_MODEL_ID: str = "gemini-embedding-001"
+    GEMINI_API_KEY: SecretStr
 
 
 settings = Settings()
