@@ -9,7 +9,6 @@ from superlinked_app.config import settings
 
 class VertexGeminiHandler(TextModelHandler):
     def __init__(self, client: genai.Client):
-        genai.configure(api_key=settings.GEMINI_API_KEY.get_secret_value())
         self.model_id = settings.GEMINI_MODEL_ID
         self.client = client
 

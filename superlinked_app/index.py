@@ -10,7 +10,7 @@ assert (
 ), "GEMINI_API_KEY must be set in environment variables to use the Gemini encoding model."
 
 # Initialize the Vertex AI client and the model handler for text embeddings
-vertex_client = genai.Client()
+vertex_client = genai.Client(api_key=settings.GEMINI_API_KEY.get_secret_value())
 handler = VertexGeminiHandler(client=vertex_client)
 
 
