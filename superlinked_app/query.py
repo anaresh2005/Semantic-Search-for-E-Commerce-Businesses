@@ -94,3 +94,5 @@ semantic_query = (
         index.product.category == category_similar_param,
     )
 )
+
+similar_items_query = semantic_query.with_vector(index.product, sl.Param("product_id"))
