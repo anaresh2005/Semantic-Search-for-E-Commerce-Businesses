@@ -12,7 +12,7 @@ openai_config = sl.OpenAIClientConfig(
     api_key=settings.OPENAI_API_KEY.get_secret_value(), model=settings.OPENAI_MODEL_ID
 )
 
-cateogry_similar_param = sl.Param(
+category_similar_param = sl.Param(
     name="query_category",
     description="The text in the user's query that refers to the category of the product.",
     options=constants.CATEGORIES,
@@ -59,5 +59,38 @@ base_query = (
             description="Filter products by type",
             option=constants.TYPE,
         ),
+    )
+)
+
+filter_query = (
+    base_query.similar(
+        index.description_space,
+        descr_similar_param,
+        sl.Param("description_similar_clause_weight"),
+    )
+    .filter(
+        index.product.category == category_similar_param,
+    )
+    .filter(
+        index.product.review_ratings >= review_rating_param,
+    )
+    .filter(
+        index.product.price <= price_param,
+    )
+)
+
+semantic_query = (
+    base_query.similar(
+        index.description_space,
+        descr_similar_param,
+        sl.Param("description_similar_clause_weight"),
+    )
+    .similar(
+        index.title_space,
+        title_similar_param,
+        sl.Param("title_similar_clause_weight"),
+    )
+    .filter(
+        index.product.category == category_similar_param,
     )
 )
