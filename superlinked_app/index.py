@@ -1,7 +1,7 @@
 from superlinked import framework as sl
 from superlinked_app import constants
 from google import genai
-from embedding import VertexGeminiHandler
+from superlinked_app.embedding import VertexGeminiHandler
 from superlinked_app.config import settings
 
 

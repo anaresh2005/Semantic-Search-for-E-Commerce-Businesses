@@ -1,7 +1,7 @@
 from pathlib import Path
 from loguru import logger
 from pydantic import SecretStr
-from pydantic import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT_DIR = Path(__file__).parent.parent
 ENV_FILE = ROOT_DIR / ".env"
