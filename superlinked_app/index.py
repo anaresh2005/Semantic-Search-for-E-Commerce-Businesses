@@ -1,7 +1,7 @@
 from superlinked import framework as sl
 from superlinked_app import constants
 from google import genai
-from superlinked_app.embedding import VertexGeminiHandler
+from superlinked_app.embedding import GeminiHandler
 from superlinked_app.config import settings
 
 
@@ -11,7 +11,7 @@ assert (
 
 # Initialize the Vertex AI client and the model handler for text embeddings
 vertex_client = genai.Client(api_key=settings.GEMINI_API_KEY.get_secret_value())
-handler = VertexGeminiHandler(client=vertex_client)
+handler = GeminiHandler(client=vertex_client)
 
 
 # Define the schema for a product using Superlinked's schema definition

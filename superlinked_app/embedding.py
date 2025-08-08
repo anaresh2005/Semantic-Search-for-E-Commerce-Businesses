@@ -1,13 +1,10 @@
 import numpy as np
 from google import genai
 from google.genai.types import EmbedContentConfig
-from superlinked.framework.common.space.embedding.model_based.model_handler import (
-    TextModelHandler,
-)
 from superlinked_app.config import settings
 
 
-class VertexGeminiHandler(TextModelHandler):
+class GeminiHandler:
     def __init__(self, client: genai.Client):
         self.model_id = settings.GEMINI_MODEL_ID
         self.client = client
